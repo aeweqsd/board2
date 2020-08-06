@@ -43,6 +43,6 @@
       <div class="col-sm-2"></div>
       </div>
       </div>
-	<%@ include file= "Footer.jsp" %>
+	<%@ include file= "Footer.jsp"%>
 </body>
 </html>
