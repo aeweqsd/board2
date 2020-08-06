@@ -98,11 +98,13 @@ public class Board implements DBUSE{
 				db2.set_name(rs.getString("name"));
 				db2.set_time(rs.getString("time"));
 			}
-			sql="update board set hit=? where num=?";
+			sql="update board set hit=? where idboard=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,db.get_hit()+1);
-			pstmt.setInt(2,db.get_idboard());
-			pstmt.executeQuery();
+			pstmt.setInt(1,db2.get_hit()+1);
+			pstmt.setInt(2,num);
+			int r = pstmt.executeUpdate();
+			System.out.println(r);
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
