@@ -1,14 +1,10 @@
 
 
   <!-- Footer Elements -->
-  <div class="footer container page-footer font-small unique-color-dark pt-4">
-
-    <!-- Call to action -->
-    <ul class="list-unstyled list-inline text-center py-2">
-      <li class="list-inline-item">
-        <h5 class="mb-1">This page is for test</h5>
-      </li>
-    </ul>
+  <div class="footer">
+    <div class="container">
+    	<p class="text-muted">This is test </p>
+    </div>
     <!-- Call to action -->
 
   </div>

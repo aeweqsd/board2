@@ -7,8 +7,11 @@ public class CommentBean {
 	private String time;
 	private int board_idboard;
 	private int idmember;
+	private String writer;
 	public void set_idcomment(int idcomment) {
 		this.idcomment=idcomment;
+	}public void set_writer(String writer) {
+		this.writer= writer;
 	}public void set_content(String content) {
 		this.content = content;
 	}public void set_selfkey(int selfkey) {
@@ -31,5 +34,7 @@ public class CommentBean {
 		return this.board_idboard;
 	}public int get_idmember() {
 		return this.idmember;
+	}public String get_writer() {
+		return this.writer;
 	}
 }

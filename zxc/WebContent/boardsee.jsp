@@ -31,15 +31,24 @@
 			<button type="button" id="show_insert_comment" class="btn btn-xs btn-default ">write_Comment</button></div>
 	</div>
 	</div>
-	<c:set var="name" value="<%=name1%>"/>
-	<c:set var="name2" value="<%=name2%>"/>
-	<c:if test="${name eq name2}">	<%@include file= "Modified.jsp" %></c:if>
+	<div class="container layer3">
+		<div class = "row">
+			<div class = "col-xs-12">
+				<div class ="form-group">
+					<button type="button" id="modified" class="replyUpdate btn btn-warning btn-xs">Modified</button>
+					<button type="button" id="delete"class="replyUpdate btn btn-danger btn-xs">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-	<div id="insert_comment" style="display:block"class="layer6">
-	<textarea class="form-control"rows="5" name="content" id="content"
-			placeholder="Insert Content" required></textarea>
+	<div id="insert_comment" style="display:none"class="layer6">
+		<textarea class="form-control"rows="5" name="content" id="content"
+				placeholder="Insert Content" required></textarea>
 		<button type="button" id="commit" class="btn btn-xs btn-success">Commit</button>	
-</div>
+	</div>
+	<div id="cmt" class="layer7">
+	</div>
 	
 
 <%@ include file= "Footer.jsp" %>
@@ -47,18 +56,96 @@
 <script>
 $(document).on('click', '#show_insert_comment', function() {
 	var con = document.getElementById('insert_comment');
-		if(con.style.display =="block"){
-			con.style.display="none";
-		}else{
-			con.style.display="block";
+	if(con.style.display =="block"){
+		con.style.display="none";
+	}else{
+		con.style.display="block";
+	}
+});
+$(document).on('click', '#delete',function(){
+	var name1 =<%=name1%>
+	var name2 =<%=name2%>
+	var idboard =<%=see.get_idboard()%>;
+	if(name1==name2){
+		$.ajax('/zxc/service/delete_board',{
+			type:'post',
+			datatype:'html',
+			data:{
+				idboard:idboard
+			},
+		success:function(){
+			alert("Delete Complete");
+			window.location.href="board.jsp";
+		},
+		error:function(data,status,er){
+			alert("error:"+data+"status"+status+"er"+er);
+		}	
+		})
+		
+	}else{
+		alert("not matching this board");
+	}
+	
+	
+	
+	
+});
+$(document).on('click', '#modified',function(){
+	var name1 =<%=name1%>
+	var name2 =<%=name2%>
+	var idboard =<%=see.get_idboard()%>;
+	if(name1==name2){
+		$.ajax('/zxc/service/update_board',{
+			type:'post',
+			datatype:'html',
+			data:{
+				idboard:idboard
+			},
+		success:function(){
+			
+		},
+		error:function(data,status,er){
+			alert("error:"+data+"status"+status+"er"+er);
+		}	
+		})
+		
+	}else{
+		alert("not matching this board");
+	}
+	
+	
+	
+	
+});
+
+
+$(document).on('click', '#commit', function() {
+	var idboard = <%=see.get_idboard()%>;
+	var commentwriter= <%=name2%>;
+	var content = document.getElementById('content').value;
+	
+	/* alert(content.value);
+	alert(idboard);
+	alert(commentwriter); */
+	console.log("11");
+	$.ajax('/zxc/service/insert_comment', {
+		type:'post',
+		datatype : 'html',
+		data:{
+			idboard: idboard,
+			commentwriter: commentwriter,
+			content: content
+		},
+		success:function(html){
+//			alert("Complete");
+			$('#cmt').html(html);
+			//document.getElementById('cmt').html = html;
+		},
+		error:function(request,status,error){
 		}
 	});
-$(document).on('click', '#commit', function() {
-	var content = document.getElementById('#content');
-		console.log(content);
-		//Using ajax send to controller
-	});
-	
+});
 
+	
 
 </script>

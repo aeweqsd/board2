@@ -5,16 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import Bean.BoardBean;
+import Bean.*;
 
 //CONTENT WRITER SELFKEY TIME board_idboard
 public class Comment implements DBUSE {
 
 	@Override
 	public void insertDB(Object a){
-		BoardBean db = new BoardBean();
-		db = (BoardBean) a;
+		CommentBean db = new CommentBean();
+		db = (CommentBean) a;
 		Connection conn;
 		PreparedStatement pstmt =null;
 		Statement stmt = null;
@@ -22,15 +24,15 @@ public class Comment implements DBUSE {
 		try {
 			conn = DBConnection.get_connect();
 			stmt=conn.createStatement();
-			String sql = "insert into board(name,content,hit,time,idmember) values(?,?,?,?,?)";
+			String sql = "insert into comment(content,selfkey,time,board_idboard,idmember) values(?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, db.get_name());
-			pstmt.setString(2, db.get_content());
-			pstmt.setInt(3,0);
-			pstmt.setString(4,time);
+			pstmt.setString(1, db.get_content());
+			pstmt.setInt(2,db.get_selfkey());
+			pstmt.setString(3,time);
+			pstmt.setInt(4,db.get_board_idboard());
 			pstmt.setInt(5,db.get_idmember());
 			int i = pstmt.executeUpdate();
-			System.out.println(i+"°¡ µé¾î°¬À½");
+			System.out.println(i);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -98,6 +100,35 @@ public class Comment implements DBUSE {
 	public Object selectDB(Object a) {
 		// TODO Auto-generated method stub
 		return a;
+	}
+	public List<CommentBean> selectList(int idboard){
+		List<CommentBean> list = new ArrayList<>();
+		Connection conn;
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		Statement stmt =null;
+		try{
+			conn = DBConnection.get_connect();
+			stmt=conn.createStatement();
+			String sql ="select * from comment where board_idboard = ? order by time desc";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, idboard);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				CommentBean comment = new CommentBean();
+				comment.set_idcomment(rs.getInt("idcomment"));
+				comment.set_selfkey(rs.getInt("selfkey"));
+				comment.set_time(rs.getString("time"));
+				comment.set_board_idboard(rs.getInt("board_idboard"));
+				comment.set_content(rs.getString("content"));
+				comment.set_idmember(rs.getInt("idmember"));
+				list.add(comment);
+			}
+			
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }

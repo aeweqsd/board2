@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <html lang="en">
   <head>
@@ -22,29 +21,19 @@
 
     <!-- Custom styles for this template -->
     <link href="starter-template.css" rel="stylesheet">
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
 	<style>
 	.footer {
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: 0;
-
-    width: 100%;
-
-	padding: 15px 0;
-
-	text-align: center;
-
-	color: white;
-
-	background: blue;
-
+	position : absolute;
+	bottom : 0;
+	width : 100%;
+	height : 60px;
+	background-color : blue;
 }
+
+
 	.layer{
   position:absolute;
   top:40%;
@@ -89,7 +78,14 @@
 	left : 30%;
 	margin: -50px 0 0 -50px;
 	width:600px;
-		}
+}  .layer7{
+	position:absolute;
+	top : 120%;
+	left :0%;
+	margin : 0 0 0 50px;
+
+}
+		
 
 
 

@@ -1,10 +1,12 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -48,12 +50,14 @@ public class asdasd extends HttpServlet {
 				insert_board(request,response);
 			else if(url.equals("boardsee"))
 				select_board(request,response);
-			else if(url.equals("boardmodified"))
-				update_board(request,response);
-			else if(url.equals("boarddelete"))
-				delete_board(request,response);
 			else if(url.equals("board"))
 				board(request,response);
+			else if(url.equals("insert_comment"))
+				insert_comment(request,response);
+			else if(url.equals("delete_board"))
+				delete_board(request,response);
+//			else if(url.equals("update_board"))
+//				update_board(request,response);
 			else{
 				rpath = path(url);
 				RequestDispatcher Dis = request.getRequestDispatcher(rpath);
@@ -162,23 +166,22 @@ public class asdasd extends HttpServlet {
 		Dis.forward(request, response);
 		
 	}
-	protected void update_board(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-		BoardBean board = new BoardBean();
-		Board b = new Board();
-		request.setAttribute("see",DB.selectDB(b,board));
-		String path="/boardsee.jsp";
-		RequestDispatcher Dis = request.getRequestDispatcher(path);
-		Dis.forward(request, response);
-		
-	}
+//	protected void update_board(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+//		BoardBean board = new BoardBean();
+//		Board b = new Board();
+//		int idboard = Integer.parseInt(request.getParameter("idboard"));
+//		board.set_idboard(idboard);
+//		request.setAttribute("modified", DB.selectDB(b, board));
+//		String path ="/write.jsp";
+//		RequestDispatcher Dis = request.getRequestDispatcher(path);
+//		Dis.forward(request, response);
+//		
+//	}
 	protected void delete_board(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 		BoardBean board = new BoardBean();
-		board.set_idboard(Integer.parseInt(request.getParameter("num")));
+		board.set_idboard(Integer.parseInt(request.getParameter("idboard")));
 		Board b = new Board();
 		DB.deleteDB(b, board);
-		String path="/board.jsp";
-		RequestDispatcher Dis = request.getRequestDispatcher(path);
-		Dis.forward(request, response);
 		
 	}
 	protected void board(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -194,5 +197,29 @@ public class asdasd extends HttpServlet {
 		Dis.forward(request, response);
 		
 	}
+	protected void insert_comment(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		CommentBean comment= new CommentBean();
+		int idboard =Integer.parseInt(request.getParameter("idboard"));
+		int commentwriter = Integer.parseInt(request.getParameter("commentwriter"));
+		int idcomment = 0;
+		if(request.getParameter("idcomment")!=null) {
+			idcomment = Integer.parseInt(request.getParameter("idcomment"));
+		}
+		String content = request.getParameter("content");
+		comment.set_board_idboard(idboard);
+		comment.set_idmember(commentwriter);
+		comment.set_content(content);
+		comment.set_selfkey(idcomment);
+		Comment cm = new Comment();
+		DB.insertDB(cm,comment);
+//		PrintWriter out = response.getWriter();
+//		out.print("<p>hihihi hello</p>");
+		String path="/comment.jsp";
+		RequestDispatcher Dis = request.getRequestDispatcher(path);
+		Dis.forward(request, response);
+		
+		
+	}
+	
 
 }

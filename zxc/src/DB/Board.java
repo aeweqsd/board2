@@ -48,7 +48,7 @@ public class Board implements DBUSE{
 		try {
 			conn = DBConnection.get_connect();
 			stmt=conn.createStatement();
-			String sql = "delete from board where num = ?";
+			String sql = "delete from board where idboard = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,db.get_idboard());
 			pstmt.executeUpdate();

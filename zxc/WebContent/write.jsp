@@ -3,6 +3,10 @@
 <%
 MemberBean member = (MemberBean)session.getAttribute("status");
 int num = member.get_idmember();
+BoardBean board = new BoardBean();
+//if(request.getAttribute("modified")!=null){
+//	board = (BoardBean)request.getAttribute("modified");	
+//}
 %>
 <body>
 	<form action="service/writing"method ="post" class="layer">
