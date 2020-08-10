@@ -7,6 +7,7 @@
 	MemberBean see2 = (MemberBean)session.getAttribute("status");
 	int name1= see2.get_idmember();
 	int name2= see.get_idmember();
+	int idboard= see.get_idboard();
 
 %>
 <ul class="container layer2">
