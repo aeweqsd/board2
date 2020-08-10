@@ -54,6 +54,7 @@
 <%@ include file= "Footer.jsp" %>
 </body>
 <script>
+
 $(document).on('click', '#show_insert_comment', function() {
 	var con = document.getElementById('insert_comment');
 	if(con.style.display =="block"){
@@ -123,11 +124,6 @@ $(document).on('click', '#commit', function() {
 	var idboard = <%=see.get_idboard()%>;
 	var commentwriter= <%=name2%>;
 	var content = document.getElementById('content').value;
-	
-	/* alert(content.value);
-	alert(idboard);
-	alert(commentwriter); */
-	console.log("11");
 	$.ajax('/zxc/service/insert_comment', {
 		type:'post',
 		datatype : 'html',
@@ -145,6 +141,8 @@ $(document).on('click', '#commit', function() {
 		}
 	});
 });
+
+
 
 	
 

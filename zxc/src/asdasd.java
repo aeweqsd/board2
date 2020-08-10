@@ -56,6 +56,8 @@ public class asdasd extends HttpServlet {
 				insert_comment(request,response);
 			else if(url.equals("delete_board"))
 				delete_board(request,response);
+			else if(url.equals("delete_comment"))
+				delete_comment(request,response);
 //			else if(url.equals("update_board"))
 //				update_board(request,response);
 			else{
@@ -182,6 +184,16 @@ public class asdasd extends HttpServlet {
 		board.set_idboard(Integer.parseInt(request.getParameter("idboard")));
 		Board b = new Board();
 		DB.deleteDB(b, board);
+		
+	}
+	protected void delete_comment(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		CommentBean comment = new CommentBean();
+		int idboard = Integer.parseInt(request.getParameter("idboard"));
+		int idcomment =Integer.parseInt(request.getParameter("idcomment"));
+		comment.set_idcomment(idcomment);
+		comment.set_board_idboard(idboard);
+		Comment cm = new Comment();
+		DB.deleteDB(cm, comment);
 		
 	}
 	protected void board(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

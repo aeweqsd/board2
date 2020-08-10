@@ -42,8 +42,8 @@ public class Comment implements DBUSE {
 
 	@Override
 	public void deleteDB(Object a) {
-		BoardBean db = new BoardBean();
-		db = (BoardBean) a;
+		CommentBean db = new CommentBean();
+		db = (CommentBean) a;
 		Connection conn;
 		PreparedStatement pstmt =null;
 		ResultSet rs =null;
@@ -51,9 +51,9 @@ public class Comment implements DBUSE {
 		try {
 			conn = DBConnection.get_connect();
 			stmt=conn.createStatement();
-			String sql = "delete from board where num = ?";
+			String sql = "delete from comment where idcomment = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,db.get_idboard());
+			pstmt.setInt(1,db.get_idcomment());
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -110,7 +110,20 @@ public class Comment implements DBUSE {
 		try{
 			conn = DBConnection.get_connect();
 			stmt=conn.createStatement();
-			String sql ="select * from comment where board_idboard = ? order by time desc";
+			String sql ="select		tb.*\r\n" + 
+					"from		(\r\n" + 
+					"			select		*\r\n" + 
+					"            from		comment ta\r\n" + 
+					"            where		1=1\r\n" + 
+					"            and			ta.selfkey = 0\r\n" + 
+					"			) ta\r\n" + 
+					"left join	(           \r\n" + 
+					"			select 		*\r\n" + 
+					"			from 		comment ta\r\n" + 
+					"            where		1=1\r\n" + 
+					"            ) tb on ta.idcomment = tb.idcomment or ta.idcomment = tb.selfkey\r\n" + 
+					"where 		ta.board_idboard = ?\r\n" + 
+					"order by 	ta.idcomment desc, tb.selfkey asc";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, idboard);
 			rs = pstmt.executeQuery();
