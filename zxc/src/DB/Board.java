@@ -29,7 +29,7 @@ public class Board implements DBUSE{
 			pstmt.setString(4,time);
 			pstmt.setInt(5,db.get_idmember());
 			int i = pstmt.executeUpdate();
-			System.out.println(i+"°¡ µé¾î°¬À½");
+			System.out.println(i+"ï¿½ï¿½ ï¿½ï¿½î°¬ï¿½ï¿½");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +57,6 @@ public class Board implements DBUSE{
 		}
 		
 	}
-
 	@Override
 	public void updateDB(Object a) {
 		BoardBean db = new BoardBean();
