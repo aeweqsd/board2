@@ -58,8 +58,8 @@ public class asdasd extends HttpServlet {
 				delete_board(request,response);
 			else if(url.equals("delete_comment"))
 				delete_comment(request,response);
-//			else if(url.equals("update_board"))
-//				update_board(request,response);
+			else if(url.equals("show_comment"))
+				show_comment(request,response);
 			else{
 				rpath = path(url);
 				RequestDispatcher Dis = request.getRequestDispatcher(rpath);
@@ -194,6 +194,9 @@ public class asdasd extends HttpServlet {
 		comment.set_board_idboard(idboard);
 		Comment cm = new Comment();
 		DB.deleteDB(cm, comment);
+		String path="/comment.jsp";
+		RequestDispatcher Dis = request.getRequestDispatcher(path);
+		Dis.forward(request, response);
 		
 	}
 	protected void board(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -224,8 +227,13 @@ public class asdasd extends HttpServlet {
 		comment.set_selfkey(idcomment);
 		Comment cm = new Comment();
 		DB.insertDB(cm,comment);
-//		PrintWriter out = response.getWriter();
-//		out.print("<p>hihihi hello</p>");
+		show_comment(request,response);
+		
+		
+	}
+	protected void show_comment(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
+		
+		int idboard =Integer.parseInt(request.getParameter("idboard"));
 		String path="/comment.jsp";
 		RequestDispatcher Dis = request.getRequestDispatcher(path);
 		Dis.forward(request, response);

@@ -10,117 +10,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 	
     <title><%=title %></title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 
-	<style>
-	.footer {
-	position : absolute;
-	bottom : 0;
-	width : 100%;
-	height : 60px;
-	background-color : blue;
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+ 
+<style>
+	[class*="col-"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+   background-color: #eee;  
+   background-color: rgba(86,61,124,.15); 
+     border: 1px solid #ddd; 
+   border: 1px solid rgba(86,61,124,.2); 
 }
-
-
-	.layer{
-  position:absolute;
-  top:40%;
-  left:40%;
-  width:400px;
-  height:300px;
-  margin:-50px 0 0 -50px;
+html{
+  position: relative;
+  min-height: 100%;
 }
-	.layer2{
-	position:absolute;
-	top : 30%;
-	left:10%;
-	margin: -50px 0 0 -50px;
+  body{
+    min-height: 2000px;
+    padding-top : 70px;
+    margin-bottom:60px;
 
+  }
+  #footer{
+    position:fixed;
+    padding: 10px 10px 0px 10px;
+    bottom:0;
+    width:100%;
+    height :40px;
+    background-color:grey;
+  }
+  .container{
+    width:auto;
+    max-width: 680px;
+    padding: 0 15px;
+  }
+  .container .text-muted{
+    margin:20px 0;
+  }
 	
-	
-}
-	.layer3{
-	position:absolute;
-	top : 60%;
-	left:60%;
-	width:400px;
-	margin: -50px 0 0 -50px;
-}
-	.layer4{
-	position:absolute;
-	top : 60%;
-	left:50%;
-	width:400px;
-	margin: -50px 0 0 -50px;
-}
-	.layer5{
-	position:absolute;
-	top : 70%;
-	left:40%;
-	width:400px;
-	margin: -50px 0 0 -50px;
-}
-	.layer6{
-	position:absolute;
-	top : 70%;
-	left : 30%;
-	margin: -50px 0 0 -50px;
-	width:600px;
-}  .layer7{
-	position:absolute;
-	top : 120%;
-	left :0%;
-	margin : 0 0 0 50px;
-
-}
-
-
-ul{
-   list-style:none;
-   padding-left:0px;
-   }
-
-
-.footer {
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: 0;
-
-    width: 100%;
-
-	padding: 15px 0;
-
-	text-align: center;
-
-}
-.a1 {
-color : black ;
-font-size:12px ;
-background:white;
-}
-.a2{
-color : white ;
-font-size: 12px;
-background : gray;
-}
-ul >li{
-	font-family: "Times New Roman", Times, serif;
-}
 </style>
   </head>
 <body>

@@ -10,16 +10,17 @@
 
 %>
 
-<ul class="py-2 layer2 container">
-      <li>
-        	<div class= "row ">
-        		<div class="col-xs-2 a1">
-        		<h2>member id = <%=id %> </h2></div>
-        		<div class="col-xs-7 a1">
-        		<h2>member password = <%=password %></h2></div>
-        	</div>
-      </li>
-      </ul>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+		<table class="table table striped">
+			<tr><th>Id</th><th>Password</th></tr>
+			<tr><td><%=id%></td><td><%=password%></td></tr>
+		</table>
+		</div>
+		<div class="col-xs-1"></div>
+	</div>
+</div>
+     
       <%@ include file= "Footer.jsp" %>
-</body>
-</html>

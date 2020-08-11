@@ -10,52 +10,65 @@
 	int idboard= see.get_idboard();
 
 %>
-<ul class="container layer2">
-      <li>
-        	<div class= "row">
-        		<div class="col-xs-12 a1">
-        		<h4>number     <%=see.get_idboard()%></h4></div>
-        		<div class="col-xs-12 a1">
-        		<h4>name      <%=see.get_name() %></h4></div>
-        		<div class="col-xs-12 a1">
-        		<h4>writer     <%=see.get_idmember() %></h4></div>
-        		<div class="col-xs-12 a1">
-				<h4>time  		<%=see.get_time() %></h4></div>
-				<div class="col-xs-12 a1">
-				<h4>hit 		<%=see.get_hit() %></h4></div>
-        	</div>
-      </li>
-</ul>
-	<div class="layer4 container">
-		<div class="row">
+<div class="container-fluid">
+      <div class="row">
+ 		<div class="col-xs-1"></div>
+ 		<div class="col-xs-10">
+        		<table class="table table-striped">
+        		<tr>
+        		<td>number  <%=see.get_idboard()%></td></tr>
+        		<tr><td>name      <%=see.get_name() %></td></tr>
+        		<tr><td>content      <%=see.get_content()%></td></tr>
+        		<tr><td>writer     <%=see.get_idmember() %></td></tr>
+				<tr><td>time  		<%=see.get_time() %></td></tr>
+				<tr><td>hit 		<%=see.get_hit() %></td></tr>
+				</table>		
+  
 			<div class="col-xs-12">		
-			<button type="button" id="show_insert_comment" class="btn btn-xs btn-default ">write_Comment</button></div>
-	</div>
-	</div>
-	<div class="container layer3">
-		<div class = "row">
-			<div class = "col-xs-12">
-				<div class ="form-group">
+			<button type="button" id="show_insert_comment" class="btn btn-xs btn-default ">write_Comment</button>
+			<div class ="form-group text-center">
 					<button type="button" id="modified" class="replyUpdate btn btn-warning btn-xs">Modified</button>
 					<button type="button" id="delete"class="replyUpdate btn btn-danger btn-xs">Delete</button>
-				</div>
 			</div>
-		</div>
 	</div>
-
-	<div id="insert_comment" style="display:none"class="layer6">
+				
+	
+	<div id="insert_comment" style="display:none"class="col-xs-12">
 		<textarea class="form-control"rows="5" name="content" id="content"
 				placeholder="Insert Content" required></textarea>
 		<button type="button" id="commit" class="btn btn-xs btn-success">Commit</button>	
 	</div>
-	<div id="cmt" class="layer7">
+	<div id="cmt" class="col-xs-12">
+	</div>
+	</div>
+	<div class="col-xs-1"></div>
+	</div>
 	</div>
 	
 
 <%@ include file= "Footer.jsp" %>
 </body>
 <script>
+$(document).ready(function(){
+	var idboard =<%=see.get_idboard()%>;
 
+	$.ajax('/zxc/service/show_comment',{
+		type:'post',
+		data:{
+			idboard:idboard
+		},
+	success:function(html){
+		$("#cmt").html(html);
+	},
+	error:function(request,status,error){
+		
+		
+}
+	
+
+	
+});
+})
 $(document).on('click', '#show_insert_comment', function() {
 	var con = document.getElementById('insert_comment');
 	if(con.style.display =="block"){
@@ -123,7 +136,7 @@ $(document).on('click', '#modified',function(){
 
 $(document).on('click', '#commit', function() {
 	var idboard = <%=see.get_idboard()%>;
-	var commentwriter= <%=name2%>;
+	var commentwriter= <%=name1%>;
 	var content = document.getElementById('content').value;
 	$.ajax('/zxc/service/insert_comment', {
 		type:'post',
@@ -140,9 +153,67 @@ $(document).on('click', '#commit', function() {
 		},
 		error:function(request,status,error){
 		}
-	});
+	
 });
 
+})
+$(document).on('click', '#commit-2',function(){
+	var idboard = <%=see.get_idboard()%>;
+	var commentwriter=<%=name1%>;
+	var idcomment=document.getElementById('commit-2').value;
+	var content=document.getElementById('reply').value;
+	$.ajax('/zxc/service/insert_comment',{
+		type:'post',
+		data:{
+			idboard:idboard,
+			idcomment:idcomment,
+			content:content,
+			commentwriter:commentwriter
+		},
+		success:function(html){
+			$('#cmt').html(html);
+		},
+		error:function(request,status,error){
+			alert("message:"+request.responseText+"\n"+"error:"+error);
+		}
+		
+	});
+	
+	
+	
+	
+})
+$(document).on('click', '#btn-delete_comment',function(){
+	var idboard=<%=idboard%>;
+	var idcomment=document.getElementById('commit-2').value;
+	$.ajax('/zxc/service/delete_comment',{
+		type:'post',
+		data:{
+			idboard:idboard,
+			idcomment:idcomment
+			
+		},
+		success:function(html){
+			$('#cmt').html(html);
+		},
+		error:function(request,status,error){
+			alert("message"+request.responseText+"error:"+error)
+		}
+	
+	
+});
+	
+})
+
+
+$(document).on('click', '.btn-idcomment', function () {
+	var id = $(this).attr('idcomment');
+	console.log($('#'+id).css('display'));
+	$('#'+id).toggle();
+	//$('#'+id).show(500);
+	//$('#'+id).hide(500);
+	
+});
 
 
 	

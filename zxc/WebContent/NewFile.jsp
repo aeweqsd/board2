@@ -21,10 +21,10 @@
 	
 	
 	
-<div class="container layer">
+<div class="container">
 	  <div class="row">
-	  	<div class="col-sm-2"></div>
-	  		<div class = "col-sm-8">
+	  		<div class="col-xs-1"></div>
+	  		<div class = "col-xs-10">
     	 		<form class="form-signin" action="/zxc/service/login" method="post">
        			 <h2 class="form-signin-heading">Please Log in</h2>
        			 <label for="inputEmail" class="sr-only">Id</label>
@@ -40,9 +40,8 @@
       			</form>
       <a href="service/Register">Register</a>
       </div>
-      <div class="col-sm-2"></div>
+		<div class="col-xs-1"></div>
       </div>
       </div>
-	<%@ include file= "Footer.jsp" %>
-</body>
-</html>
+<%@ include file= "Footer.jsp" %>
+

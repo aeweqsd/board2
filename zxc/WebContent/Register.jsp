@@ -2,10 +2,10 @@
 <body>
 
 
-<div class="container layer">
+<div class="container">
 	  <div class="row">
-	  	<div class="col-sm-2"></div>
-	  		<div class = "col-sm-8">
+	  	<div class="col-sm-1"></div>
+	  		<div class = "col-sm-10">
     	 		<form class="form-signin" action="service/memberinsert" method="post">
        			 <h2 class="form-signin-heading">Register</h2>
        			 <label for="inputEmail" class="sr-only">Id</label>
@@ -15,6 +15,7 @@
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       			</form>
       	</div>
+      	<div class="col-sm-1"></div>
 	  </div>
 </div>s
 <%@ include file= "Footer.jsp" %>

@@ -51,10 +51,12 @@ public class Comment implements DBUSE {
 		try {
 			conn = DBConnection.get_connect();
 			stmt=conn.createStatement();
-			String sql = "delete from comment where idcomment = ?";
+			String sql = "delete from comment where idcomment = ? or selfkey=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,db.get_idcomment());
+			pstmt.setInt(2,db.get_idcomment());
 			pstmt.executeUpdate();
+		
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
